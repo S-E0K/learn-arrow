@@ -4,7 +4,10 @@ import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
+import org.se0k.learnarrow.arrow.ArrowEvent;
 import org.se0k.learnarrow.target.TargetEvent;
 
 import java.util.*;
@@ -68,11 +71,16 @@ public class CommandEvent extends BukkitCommand {
                 TargetEvent targetEvent = new TargetEvent();
                 targetEvent.removeTargetManager(player);
 
-
             }
-//            case "아이템" -> {
-//
-//            }
+            case "아이템지급" -> {
+                World world = player.getWorld();
+                if (!world.getName().equals("shooter")) {
+                    player.sendMessage("사격장이 아닙니다");
+                    return false;
+                }
+                ArrowEvent arrowEvent = new ArrowEvent();
+                arrowEvent.giveArrow(player);
+            }
         }
 
         return false;
@@ -87,7 +95,7 @@ public class CommandEvent extends BukkitCommand {
 
     @Override
     public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) {
-        if (args.length == 1) return Arrays.asList("이동", "돌아가기", "생성", "지우기");
+        if (args.length == 1) return Arrays.asList("이동", "돌아가기", "생성", "지우기", "아이템지급");
         return null;
     }
 }

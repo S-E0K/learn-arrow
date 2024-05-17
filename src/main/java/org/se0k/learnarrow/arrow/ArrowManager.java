@@ -4,6 +4,6 @@ import org.bukkit.entity.Player;
 
 public interface ArrowManager {
     void giveArrow(Player player);
-    void
+    void blockDestroy(Player player); //활 무한 하고 왼손 화살 하나씩 지우기
 
 }
