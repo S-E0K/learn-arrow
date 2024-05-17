@@ -1,0 +1,4 @@
+name: learn-arrow
+version: '1.0'
+main: org.se0k.learnarrow.Learn_arrow
+api-version: '1.20'
