@@ -8,5 +8,4 @@ public interface TargetManager {
 
     void createTargetManager(Player player);
     void removeTargetManager(Player player);
-
 }

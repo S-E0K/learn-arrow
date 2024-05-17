@@ -7,11 +7,10 @@ import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
-import java.util.EventListener;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class TargetEvent implements TargetManager, EventListener {
+public class TargetEvent implements TargetManager {
 
     public static final HashMap<UUID, Location> blockLoc = new HashMap<>();
 
@@ -112,10 +111,4 @@ public class TargetEvent implements TargetManager, EventListener {
         blockFace.remove(playerUUID);
         blockLoc.remove(playerUUID);
     }
-
-
-
-
-
-
 }
