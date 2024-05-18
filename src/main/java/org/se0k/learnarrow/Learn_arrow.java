@@ -3,6 +3,7 @@ package org.se0k.learnarrow;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.se0k.learnarrow.arrow.ArrowEvent;
 import org.se0k.learnarrow.target.TargetEvent;
 
 import java.util.Objects;
@@ -16,6 +17,7 @@ public final class Learn_arrow extends JavaPlugin {
     public void onEnable() {
         Bukkit.getCommandMap().register("사격장", new CommandEvent("사격장"));
         Bukkit.getCommandMap().register("fl", new ReloadConfirm("fl"));
+        getServer().getPluginManager().registerEvents(new ArrowEvent(), this);
 
     }
 

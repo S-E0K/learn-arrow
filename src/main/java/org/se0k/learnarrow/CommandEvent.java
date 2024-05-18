@@ -13,6 +13,7 @@ import org.se0k.learnarrow.target.TargetEvent;
 import java.util.*;
 
 import static org.se0k.learnarrow.target.TargetEvent.*;
+import static org.se0k.learnarrow.arrow.ArrowEvent.*;
 
 public class CommandEvent extends BukkitCommand {
 
@@ -52,6 +53,7 @@ public class CommandEvent extends BukkitCommand {
 
             }
             case "생성" -> {
+                startTime = System.currentTimeMillis();
                 if (playerLoc.get(playerUUID) == null) {
                     player.sendMessage("사격장에 가지 않았습니다");
                     return false;
@@ -60,6 +62,14 @@ public class CommandEvent extends BukkitCommand {
                     player.sendMessage("이미 만들었습니다");
                     return false;
                 }
+
+                ArrowEvent arrowEvent = new ArrowEvent();
+                arrowEvent.giveArrow(player);
+
+                targetCheck = 0;
+                leftHand = 0;
+                shootCheck = 0;
+
                 TargetEvent targetEvent = new TargetEvent();
                 targetEvent.createTargetManager(player);
             }
@@ -68,19 +78,20 @@ public class CommandEvent extends BukkitCommand {
                     player.sendMessage("과녁을 만들지 않았습니다");
                     return false;
                 }
+
                 TargetEvent targetEvent = new TargetEvent();
                 targetEvent.removeTargetManager(player);
 
             }
-            case "아이템지급" -> {
-                World world = player.getWorld();
-                if (!world.getName().equals("shooter")) {
-                    player.sendMessage("사격장이 아닙니다");
-                    return false;
-                }
-                ArrowEvent arrowEvent = new ArrowEvent();
-                arrowEvent.giveArrow(player);
-            }
+//            case "아이템지급" -> {
+//                World world = player.getWorld();
+//                if (!world.getName().equals("shooter")) {
+//                    player.sendMessage("사격장이 아닙니다");
+//                    return false;
+//                }
+//                ArrowEvent arrowEvent = new ArrowEvent();
+//                arrowEvent.giveArrow(player);
+//            }
         }
 
         return false;
@@ -95,7 +106,7 @@ public class CommandEvent extends BukkitCommand {
 
     @Override
     public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) {
-        if (args.length == 1) return Arrays.asList("이동", "돌아가기", "생성", "지우기", "아이템지급");
+        if (args.length == 1) return Arrays.asList("이동", "돌아가기", "생성", "지우기");
         return null;
     }
 }
